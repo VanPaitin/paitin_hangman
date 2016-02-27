@@ -28,7 +28,7 @@ class Levels
   end
 
   def word_genegrator(min, max)
-    words = File.open("/dictionary.txt", "r").readlines.map!(&:chomp)
+    words = File.open("./dictionary.txt", "r").readlines.map!(&:chomp)
     level_words = words.select { |i| i.length >= min && i.length <= max }
     random_index = rand(level_words.length)
     @game_word = level_words[random_index]
