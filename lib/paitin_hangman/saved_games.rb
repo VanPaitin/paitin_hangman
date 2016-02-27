@@ -2,7 +2,7 @@ require_relative "levels"
 module PaitinHangman
 class GameResumption
   def initialize
-    @all_games = YAML.load_stream(File.open("games.yml", "r+"))
+    @all_games = YAML.load_stream(File.open("games.yml", "a+"))
     puts "Enter the name you used to store the game"
     name = gets.chomp.upcase
     @saved_game = @all_games.select do |game|
