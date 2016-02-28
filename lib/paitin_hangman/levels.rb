@@ -98,10 +98,10 @@ class Levels
 
   def verify_guess
     puts "Enter a guess"
-    @guess = gets.chomp.downcase
+    @guess = STDIN.gets.chomp.downcase
     cheat_or_quit_or_history
     until length_one?(@guess) && unique?(@guess) && number?(@guess)
-      @guess = gets.chomp.downcase
+      @guess = STDIN.gets.chomp.downcase
       puts @game_word if @guess == ":c"
       puts "Your missed guesses: #{@misses.join(', ')}" if @guess == ":h"
     end
@@ -126,10 +126,10 @@ class Levels
   def quit_or_save
     exit if @player1.nil? == false
     puts "Do you want to save your game? type 'Yes' or 'No'"
-    choice = gets.chomp.downcase
+    choice = STDIN.gets.chomp.downcase
     until choice == "yes" || choice == "no"
       puts "Please type a 'Yes' or a 'No'"
-      choice = gets.chomp.downcase
+      choice = STDIN.gets.chomp.downcase
     end
     choice == "no" ? exit : save_game
   end
@@ -162,16 +162,16 @@ class Levels
     end
   end
 
-  def win_game(chances, counter)
+  def win_game(chances, counter, player = @player2)
     if @count == @game_word.chars.uniq.length
-      puts "Congratulations #{@player2}! You have won the game".green
+      puts "Congratulations #{player}! You have won the game".green
       exit
     end
     puts "You have #{chances - 1 - counter} chance(s) left"
   end
 
-  def end_game
-    puts "Game over! You are dead, sorry #{@player2}".red
+  def end_game(player = @player2)
+    puts "Game over! You are dead, sorry #{player}".red
     puts "The word is #{@game_word.upcase}"
     Message.end_games
     choice_integrity

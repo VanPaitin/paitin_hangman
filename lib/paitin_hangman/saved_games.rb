@@ -4,7 +4,7 @@ class GameResumption
   def initialize
     @all_games = YAML.load_stream(File.open("games.yml", "a+"))
     puts "Enter the name you used to store the game"
-    name = gets.chomp.upcase
+    name = STDIN.gets.chomp.upcase
     @saved_game = @all_games.select do |game|
       game.player_name == name
     end
@@ -24,33 +24,33 @@ class GameResumption
 
   def choice_integrity
     puts "Now enter the number for the game you want to play"
-    @choice = gets.chomp.to_i
+    @choice = STDIN.gets.chomp.to_i
     until @choice > 0 && @choice <= @saved_game.length
       puts "Enter a number that has a game please"
-      @choice = gets.chomp.to_i
+      @choice = STDIN.gets.chomp.to_i
     end
     @choice -= 1
     load_properties
   end
 
   def load_properties
-    game_object = @saved_game[@choice]
-    @name = game_object.player_name
-    @misses = game_object.misses
-    @right_guesses = game_object.right_guesses
-    @chances = game_object.chances
-    @word_control = game_object.word_control
-    @game_word = game_object.game_word
-    load_properties_cont(game_object)
+    @game_object = @saved_game[@choice]
+    @name = @game_object.player_name
+    @misses = @game_object.misses
+    @right_guesses = @game_object.right_guesses
+    @chances = @game_object.chances
+    @word_control = @game_object.word_control
+    @game_word = @game_object.game_word
+    load_properties_cont
   end
 
   def delete_game
-    @all_games.delete(@saved_game[@choice])
-    File.open("games.yml", "r+") { |data| YAML.dump(@all_games, data) }
+    @all_games.delete_if { |x| x.word_control == @game_object.word_control}
+    File.open("games.yml", "w+") { |data| YAML.dump_stream(@all_games, data) }
   end
 
-  def load_properties_cont(game_object)
-    count = game_object.count
+  def load_properties_cont
+    count = @game_object.count
     #delete_game
     Saved.new(@name, @chances, @word_control, @game_word,
               @misses, @right_guesses, count).trials(@chances)
@@ -82,9 +82,9 @@ class Saved < Levels
       @counter = counter
       verify_guess
       compare_guess
-      win_game(chances, counter)
+      win_game(chances, counter, @player_name)
     end
-    end_game
+    end_game(@player_name)
   end
 
   def setup

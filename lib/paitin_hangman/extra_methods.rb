@@ -2,10 +2,10 @@ require_relative "messages"
 module PaitinHangman
 module SimpleMethods
   def verify_name_integrity
-    @name = gets.chomp.upcase.strip
+    @name = STDIN.gets.chomp.upcase.strip
     while @name.scan(/[^A-Z\s_]/).empty? == false || @name.empty?
       Message.verify_name
-      @name = gets.chomp.upcase.strip
+      @name = STDIN.gets.chomp.upcase.strip
     end
   end
 
@@ -22,10 +22,10 @@ module SimpleMethods
   # => The method makes sure a valid option is picked
 
   def option_integrity
-    @option = gets.chomp
+    @option = STDIN.gets.chomp
     until @option == "1" || @option == "2"
       puts "Enter either a '1' or a '2'"
-      @option = gets.chomp
+      @option = STDIN.gets.chomp
     end
     @option
   end
@@ -58,10 +58,10 @@ module SimpleMethods
   end
   
   def choice_integrity
-    choice = gets.chomp.downcase
+    choice = STDIN.gets.chomp.downcase
     until choice == "r" || choice == "q" || choice == "quit"
       puts "You must enter either a 'r' or 'q' or type 'quit'"
-      choice = gets.chomp.downcase
+      choice = STDIN.gets.chomp.downcase
     end
     decide(choice)
   end

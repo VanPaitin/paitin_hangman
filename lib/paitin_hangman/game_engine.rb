@@ -12,10 +12,10 @@ class Computer
   end
 
   def level_integrity
-    @choice = gets.chomp
+    @choice = STDIN.gets.chomp
     until @choice == "1" || @choice == "2" || @choice == "3"
       puts "Please press either '1', '2' or '3'"
-      @choice = gets.chomp
+      @choice = STDIN.gets.chomp
     end
   end
 

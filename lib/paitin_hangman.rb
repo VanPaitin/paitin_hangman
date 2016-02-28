@@ -9,7 +9,7 @@ module PaitinHangman
     end
 
     def process
-      choice = gets.chomp.downcase
+      choice = STDIN.gets.chomp.downcase
       choice_integrity(choice)
     end
 
