@@ -4,52 +4,60 @@ require_relative "extra_methods"
 # => This class only ensures the smooth transfer of control to the levels
 module PaitinHangman
 class Computer
-  def initialize(name)
-    @id = name
+  def initialize
     Message.level_choice
-    level_integrity
-    level
   end
 
-  def level_integrity
-    @choice = STDIN.gets.chomp
-    until @choice == "1" || @choice == "2" || @choice == "3"
+  def level_integrity(name)
+    choice = gets.chomp
+    until choice == "1" || choice == "2" || choice == "3"
       puts "Please press either '1', '2' or '3'"
-      @choice = STDIN.gets.chomp
+      choice = STDIN.gets.chomp
     end
+    level(choice, name)
   end
 
-  def level
-    case @choice
-    when "1" then Levels.new(@id, 4, 8, 10)
-    when "2" then Levels.new(@id, 9, 12, 12)
-    when "3" then Levels.new(@id, 13, 25, 15)
+  def level(choice, name)
+    case choice
+    when "1" then Levels.new(name, 4, 8, 10)
+    when "2" then Levels.new(name, 9, 12, 12)
+    when "3" then Levels.new(name, 13, 25, 15)
     end
   end
 end
 
-class Player < Computer
+class Player
   include SimpleMethods
-  def initialize(name)
-    @player1 = name
-    get_friend_name
-    @player2 = @name
-    puts "Hello, #{@player1} and #{@player2}, who will like to challenge"
-    game
+
+  def first_player_name(name)
+    player1 = name
+    get_friend_name(player1)
   end
 
-  def get_friend_name
-    puts "Hi #{@player1}, what is the name of your friend"
+  def get_friend_name(player1)
+    puts "Hi #{player1}, what is the name of your friend"
     verify_name_integrity
+    player2 = @name
+    puts "Hello, #{player1} and #{player2}, who will like to challenge"
+    game(player1, player2)
   end
 
-  def game
+  def game(player1, player2)
     verify_name_integrity
-    game_player until @name == @player1 || @name == @player2
-    @other_player = @player2 if @name == @player1
-    @other_player = @player1 if @name == @player2
+    game_player until @name == player1 || @name == player2
+    other_player = player2 if @name == player1
+    other_player = player1 if @name == player2
     Message.level_choice
-    select_level
+    level_integrity(@name, other_player)
+  end
+
+  def level_integrity(name, other_player)
+    choice = gets.chomp
+    until choice == "1" || choice == "2" || choice == "3"
+      puts "Please press either '1', '2' or '3'"
+      choice = STDIN.gets.chomp
+    end
+    select_level(choice, name, other_player)
   end
 
   def game_player
@@ -57,13 +65,13 @@ class Player < Computer
     verify_name_integrity
   end
 
-  def select_level
-    level_integrity
-    case @choice
-    when "1" then Levels.new(@other_player, 4, 8, 8, @name)
-    when "2" then Levels.new(@other_player, 9, 12, 10, @name)
-    when "3" then Levels.new(@other_player, 13, 25, 12, @name)
+  def select_level(choice, name, other_player)
+    case choice
+    when "1" then Levels.new(other_player, 4, 8, 10, name)
+    when "2" then Levels.new(other_player, 9, 12, 12, name)
+    when "3" then Levels.new(other_player, 13, 25, 15, name)
     end
   end
+
 end
 end

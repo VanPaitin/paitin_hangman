@@ -1,12 +1,15 @@
 require_relative "messages"
+
 module PaitinHangman
 module SimpleMethods
+  
   def verify_name_integrity
-    @name = STDIN.gets.chomp.upcase.strip
-    while @name.scan(/[^A-Z\s_]/).empty? == false || @name.empty?
+    @name = gets.chomp.upcase.strip
+    while @name.scan(/[^A-Z\s-]/).empty? == false || @name.empty?
       Message.verify_name
       @name = STDIN.gets.chomp.upcase.strip
     end
+    @name
   end
 
   # => This technically begins the game
@@ -14,15 +17,15 @@ module SimpleMethods
     Message.game_type
     option_integrity
     if @option == "2"
-      Computer.new(name)
+      Computer.new.level_integrity(name)
     else
-      Player.new(name)
+      Player.new.first_player_name(name)
     end
   end
   # => The method makes sure a valid option is picked
 
   def option_integrity
-    @option = STDIN.gets.chomp
+    @option = gets.chomp
     until @option == "1" || @option == "2"
       puts "Enter either a '1' or a '2'"
       @option = STDIN.gets.chomp
@@ -58,7 +61,7 @@ module SimpleMethods
   end
   
   def choice_integrity
-    choice = STDIN.gets.chomp.downcase
+    choice = gets.chomp.downcase
     until choice == "r" || choice == "q" || choice == "quit"
       puts "You must enter either a 'r' or 'q' or type 'quit'"
       choice = STDIN.gets.chomp.downcase

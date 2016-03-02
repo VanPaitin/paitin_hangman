@@ -1,7 +1,6 @@
 require "colorize"
 require "io/console"
 require "yaml"
-require_relative "game_play"
 require_relative "extra_methods"
 require_relative "messages"
 require_relative "game_data"
@@ -28,7 +27,7 @@ class Levels
   end
 
   def word_genegrator(min, max)
-    words = File.open("./dictionary.txt", "r").readlines.map!(&:chomp)
+    words = File.open("../dictionary.txt", "r").readlines.map!(&:chomp)
     level_words = words.select { |i| i.length >= min && i.length <= max }
     random_index = rand(level_words.length)
     @game_word = level_words[random_index]
@@ -98,7 +97,7 @@ class Levels
 
   def verify_guess
     puts "Enter a guess"
-    @guess = STDIN.gets.chomp.downcase
+    @guess = gets.chomp.downcase
     cheat_or_quit_or_history
     until length_one?(@guess) && unique?(@guess) && number?(@guess)
       @guess = STDIN.gets.chomp.downcase
@@ -171,7 +170,7 @@ class Levels
   end
 
   def end_game(player = @player2)
-    puts "Game over! You are dead, sorry #{player}".red
+    puts "Game over! You have been HANGED! Sorry #{player}".red
     puts "The word is #{@game_word.upcase}"
     Message.end_games
     choice_integrity

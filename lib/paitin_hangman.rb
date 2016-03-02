@@ -1,21 +1,23 @@
 require_relative "paitin_hangman/messages"
-require_relative "paitin_hangman/game_play"
 require_relative "paitin_hangman/saved_games"
+require_relative "paitin_hangman/version"
+require_relative "paitin_hangman/game_engine"
 module PaitinHangman
   class Paitin
+    include SimpleMethods
     def game_control
       Message.welcome
       process
     end
 
     def process
-      choice = STDIN.gets.chomp.downcase
+      choice = gets.chomp.downcase
       choice_integrity(choice)
     end
 
     def choice_integrity(choice)
       case choice
-      when "p", "play" then Game.new
+      when "p", "play" then new_game
       when "i", "instruction" then instruction
       when "q", "quit" then exit
       when "l", "load" then GameResumption.new
@@ -33,6 +35,12 @@ module PaitinHangman
       Message.instruction
       process
     end
+
+    def new_game
+      Message.game_intro
+      verify_name_integrity
+      puts "Hi #{@name}, Select a mode"
+      play(@name)
+    end
   end
 end
-PaitinHangman::Paitin.new.game_control

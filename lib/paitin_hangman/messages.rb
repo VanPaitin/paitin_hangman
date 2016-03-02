@@ -56,16 +56,16 @@ class Message
   # => game logic
 
   def self.game_type
-    puts "1)\tPlay against a Human Player, press 1"
-    puts "2)\tPlay against Computer, press 2"
+    puts "1)\tPlay against a Human Player, press 1\n"\
+    "2)\tPlay against Computer, press 2"
   end
   # informs the player of the levels available & their respective difficulties
 
   def self.level_choice
-    puts "Enter the Level you would like to play. You may press...".yellow
-    puts "1 for Beginner (4 - 8 character word)".yellow
-    puts "2 for Intermediate (9 - 12 character word)".yellow
-    puts "3 for Advanced (word has above 12 characters)".yellow
+    puts "    Enter the Level you would like to play. You may press...
+    1 for Beginner (4 - 8 character word)
+    2 for Intermediate (9 - 12 character word)
+    3 for Advanced (word has above 12 characters)".yellow
   end
 
   def self.end_games
