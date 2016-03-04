@@ -4,12 +4,12 @@ module PaitinHangman
 module SimpleMethods
   
   def verify_name_integrity
-    @name = gets.chomp.upcase.strip
-    while @name.scan(/[^A-Z\s-]/).empty? == false || @name.empty?
+    name = gets.chomp.upcase.strip
+    while name.scan(/[^A-Z\s-]/).empty? == false || name.empty?
       Message.verify_name
-      @name = STDIN.gets.chomp.upcase.strip
+      name = STDIN.gets.chomp.upcase.strip
     end
-    @name
+    name
   end
 
   # => This technically begins the game

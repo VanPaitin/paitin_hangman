@@ -38,9 +38,9 @@ module PaitinHangman
 
     def new_game
       Message.game_intro
-      verify_name_integrity
-      puts "Hi #{@name}, Select a mode"
-      play(@name)
+      name = verify_name_integrity
+      puts "Hi #{name}, Select a mode"
+      play(name)
     end
   end
 end

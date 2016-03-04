@@ -14,7 +14,7 @@ class GameData
 
   def to_s
     "#{player_name}  ===>>>     #{word_control.upcase.gsub('_', '__ ')}\n"\
-		"\t   #{@chances} chances left and you have used #{@misses.join(', ')}\n"
+		"\t   #{chances} chances left and you have used #{misses.join(', ')}\n"
   end
 end
 end

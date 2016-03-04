@@ -44,14 +44,8 @@ class GameResumption
     load_properties_cont
   end
 
-  def delete_game
-    @all_games.delete_if { |x| x.word_control == @game_object.word_control}
-    File.open("games.yml", "w+") { |data| YAML.dump_stream(@all_games, data) }
-  end
-
   def load_properties_cont
     count = @game_object.count
-    #delete_game
     Saved.new(@name, @chances, @word_control, @game_word,
               @misses, @right_guesses, count).trials(@chances)
   end

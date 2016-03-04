@@ -6,6 +6,7 @@ require_relative "messages"
 require_relative "game_data"
 module PaitinHangman
 class Levels
+  attr_reader :player2, :min, :max, :chances, :player1, :game_word
   include SimpleMethods
   def initialize(player, min, max, chances, another_player = nil)
     @misses = []
@@ -13,7 +14,7 @@ class Levels
     initialize_specs(player, min, max, chances, another_player)
     puts "\t\tWelcome #{@player2}, In this level, you will have #{@chances}
     chances to guess the word correctly"
-    word_genegrator(@min, @max) if @player1.nil?
+    word_generator(@min, @max) if @player1.nil?
     challenge_word(@min, @max) if @player1.nil? == false
     trials(@chances)
   end
@@ -26,8 +27,8 @@ class Levels
     @player1 = another_player
   end
 
-  def word_genegrator(min, max)
-    words = File.open("../dictionary.txt", "r").readlines.map!(&:chomp)
+  def word_generator(min, max)
+    words = File.open("dictionary.txt", "r").readlines.map!(&:chomp)
     level_words = words.select { |i| i.length >= min && i.length <= max }
     random_index = rand(level_words.length)
     @game_word = level_words[random_index]

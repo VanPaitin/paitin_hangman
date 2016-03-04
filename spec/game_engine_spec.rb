@@ -16,70 +16,83 @@ describe 'PaitinHangman::Computer' do
       allow(computer).to receive(:level).and_return("started")
       expect(computer.level_integrity("henry")).to eql("started")
     end
+
   end
-# end
 
   describe '#level' do
-    it "can start a new level" do
+
+    it "can start a new level one" do
       allow(PaitinHangman::Levels).to receive(:new).and_return("level 1")
       expect(computer.level("1", "henry")).to eql "level 1"
     end
+
+    it "can start a new level two" do
+      allow(PaitinHangman::Levels).to receive(:new).and_return("level 2")
+      expect(computer.level("2", "henry")).to eql "level 2"
+    end
+
+    it "can start a new level one" do
+      allow(PaitinHangman::Levels).to receive(:new).and_return("level 3")
+      expect(computer.level("3", "henry")).to eql "level 3"
+    end
   end
+
 end
 
-# describe 'PaitinHangman::Player' do
-#   @player = PaitinHangman::Player.new
+describe 'PaitinHangman::Player' do
 
+  let(:player) { PaitinHangman::Player.new }
 
-#   describe '#get_friend_name' do
-#     context 'it receives player name' do
-#       @player.instance_variable_set("player1", "Mayowa")
-#       specify { expect { @player }.to output("Hi #{player1}, what is the name of your friend").to_stdout }
-#       allow(@player).to receive(:verify_name_integrity).and_return("Simon Peter")
-#       expect(@player.get_friend_name).to eql ("Simon Peter")
-#     end
+  describe '#first_player_name' do
 
-#   end
+    it 'can receive a name' do
+      allow(player).to receive(:get_friend_name).and_return("Simon")
+      expect(player.first_player_name("Mayowa")).to eql "Simon"
+    end
 
-#   describe '#game' do
-#     @player.instance_variable_set("@player1", "Mayowa")
-#     @player.instance_variable_set("@player2", "Simon Peter")
-#     allow(@player).to receive(:verify_name_integrity).and_return("Simon")
-#     allow(@player).to receive(:game_player).and_return("Simon Peter")
-#     # specify { expect { @player.game }.to output("Enter the Level you would like to play. You may press...
-#     # 1 for Beginner (4 - 8 character word)
-#     # 2 for Intermediate (9 - 12 character word)
-#     # 3 for Advanced (word has above 12 characters)".yellow)to_stdout }
-#     allow(@player).to receive(:select_level).and_return(nil)
-#     expect(@player.game).to eql (nil)
-#   end
+  end
 
-#   describe '#game_player' do
-#     @player.instance_variable_set("@player1", "Mayowa")
-#     @player.instance_variable_set("@player2", "Simon Peter")
-#     specify { expect {@player.game_player}.to output("Please enter one of your names: #{@player1} or #{@player2}").to_stdout}
-#     allow(@player).to receive(:verify_name_integrity).and_return("Mayowa")
-#     expect(@player.game_player).to eql ("Mayowa")
-#   end
+  describe '#get_friend_name' do
+    it "can collect a friend's name and return a level" do
+      allow(player).to receive(:verify_name_integrity).and_return("Simon")
+      allow(player).to receive(:game).and_return("select a level")
+      expect(player.get_friend_name("Mayowa")).to eql "select a level"
+    end
+  end
 
-#   describe '#select_level' do
+  describe '#game' do
+    it 'can start a game' do
+      allow(player).to receive(:verify_name_integrity).and_return("Simon")
+      allow(player).to receive(:game_player).and_return("Simon")
+      allow(player).to receive(:level_integrity).and_return("level 2")
+      expect(player.game("Mayowa", "Simon")).to eql ("level 2")
+    end
+  end
 
-#     it 'can start a level one game' do
-#       allow(@player).to receive(:level_integrity).and_return('1')
-#       allow(PaitinHangman::Levels).to receive(:new).and_return(nil)
-#       expect(@player.select_level).to eql nil
-#     end
+  describe '#level_integrity' do
+    it 'selects a level' do
+      allow(player).to receive(:gets).and_return("f")
+      allow(STDIN).to receive(:gets).and_return("1")
+      allow(player).to receive(:select_level).and_return("1")
+      expect(player.level_integrity("Mayowa", "Simon")).to eql "1"
+    end
+  end
 
-#     it 'can start a level two game' do
-#       allow(@player).to receive(:level_integrity).and_return('2')
-#       allow(PaitinHangman::Levels).to receive(:new).and_return(nil)
-#       expect(@player.select_level).to eql nil
-#     end
+  describe '#select_level' do
 
-#     it 'can start a level three game' do
-#       allow(@player).to receive(:level_integrity).and_return('3')
-#       allow(PaitinHangman::Levels).to receive(:new).and_return(nil)
-#       expect(@player.select_level).to eql nil
-#     end
-#   end
-# end
+    it 'can start a level one game' do
+      allow(PaitinHangman::Levels).to receive(:new).and_return("level 1")
+      expect(player.select_level("1", "Mayowa", "Simon")).to eql "level 1" 
+    end
+
+    it 'can start a level two game' do
+      allow(PaitinHangman::Levels).to receive(:new).and_return("level 2")
+      expect(player.select_level("2", "Mayowa", "Simon")).to eql "level 2" 
+    end
+
+    it 'can start a level three game' do
+      allow(PaitinHangman::Levels).to receive(:new).and_return("level 3")
+      expect(player.select_level("3", "Mayowa", "Simon")).to eql "level 3"
+    end
+  end
+end

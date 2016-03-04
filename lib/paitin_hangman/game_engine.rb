@@ -36,19 +36,20 @@ class Player
 
   def get_friend_name(player1)
     puts "Hi #{player1}, what is the name of your friend"
-    verify_name_integrity
-    player2 = @name
+    player2 = verify_name_integrity
     puts "Hello, #{player1} and #{player2}, who will like to challenge"
     game(player1, player2)
   end
 
   def game(player1, player2)
-    verify_name_integrity
-    game_player until @name == player1 || @name == player2
-    other_player = player2 if @name == player1
-    other_player = player1 if @name == player2
+    begin 
+      puts "Please enter one of your names: #{player1} or #{player2}"
+      name = verify_name_integrity
+    end until name == player1 || name == player2
+    other_player = player2 if name == player1
+    other_player = player1 if name == player2
     Message.level_choice
-    level_integrity(@name, other_player)
+    level_integrity(name, other_player)
   end
 
   def level_integrity(name, other_player)
@@ -58,11 +59,6 @@ class Player
       choice = STDIN.gets.chomp
     end
     select_level(choice, name, other_player)
-  end
-
-  def game_player
-    puts "Please enter one of your names: #{@player1} or #{@player2}"
-    verify_name_integrity
   end
 
   def select_level(choice, name, other_player)

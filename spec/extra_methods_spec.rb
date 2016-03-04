@@ -19,33 +19,32 @@ describe 'PaitinHangman::SimpleMethods::@dummyClass' do
   end
   describe '#play' do
     before(:each) do
-      
-      allow(PaitinHangman::Computer).to receive(:new).and_return(nil)
-      allow(PaitinHangman::Player).to receive(:new).and_return(nil)
+      @computer = PaitinHangman::Computer.new
+      @player = PaitinHangman::Player.new
+      allow(@dummy).to receive(:option_integrity).and_return(nil)
+      allow(PaitinHangman::Computer).to receive(:new).and_return(@computer)
+      allow(PaitinHangman::Player).to receive(:new).and_return(@player)
     end
 
     context "if it is '2'" do
-      before(:each) do
-        allow(@dummy).to receive(:option_integrity).and_return('2')
-        @dummy.instance_variable_set("@option", @dummy.option_integrity)
+
+      it "should begin a computer game" do
+        # allow(@dummy).to receive(:option_integrity).and_return('2')
+        allow(@computer).to receive(:level_integrity).and_return("computer game")
+        @dummy.instance_variable_set("@option", '2')
+        expect(@dummy.play("Simon")).to eql "computer game"
       end
-      specify {expect{@dummy.play('lala')}.to output("1)\tPlay against a Human Player, press 1\n2)\tPlay against Computer, press 2\n").to_stdout}
     end
 
     context "if it is '1'" do
-      before(:each) do
-        allow(@dummy).to receive(:option_integrity).and_return('1')
+
+      it "should begin a player game" do
+        allow(@player).to receive(:first_player_name).and_return("player game")
+       
+        expect(@dummy.play("Simon")).to eql "player game"
       end
-      specify {expect{@dummy.play('lala')}.to output("1)\tPlay against a Human Player, press 1\n2)\tPlay against Computer, press 2\n").to_stdout}
     end
   
-
-    it 'can create an instance of Computer' do
-      allow(@dummy).to receive(:option_integrity).and_return(nil)
-      allow(PaitinHangman::Computer).to receive(:new).and_return(nil)
-      allow(PaitinHangman::Player).to receive(:new).and_return(nil)
-      expect(@dummy.play('lala')).to eql nil
-    end
   end
 
   describe '#option_integrity' do
