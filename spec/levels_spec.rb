@@ -31,8 +31,8 @@ describe PaitinHangman::Levels do
 
   describe '#word_generator' do
     it 'generates just the right word' do
-      expect(@level.word_generator(@level.min, @level.max).length).to be >= 4
-      expect(@level.word_generator(@level.min, @level.max).length).to be <= 8
+      expect(@level.word_generator(@level.min, @level.max, "").length).to be >= 4
+      expect(@level.word_generator(@level.min, @level.max, "").length).to be <= 8
     end
   end
 

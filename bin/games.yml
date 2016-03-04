@@ -1,0 +1,17 @@
+--- !ruby/object:PaitinHangman::GameData
+player_name: MJ
+misses: []
+right_guesses: []
+chances: 12
+word_control: ___________
+game_word: superscribe
+count: 0
+--- !ruby/object:PaitinHangman::GameData
+player_name: MJ
+misses: []
+right_guesses:
+- e
+chances: 14
+word_control: _e____________
+game_word: regularization
+count: 1

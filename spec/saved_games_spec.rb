@@ -6,7 +6,7 @@ end
 
 describe PaitinHangman::Saved do
   before :each do
-    @instance = PaitinHangman::Saved.new("player_name", ['m', 'i', 's', 's', 'e', 's'], %w{r i g h t g u e s s e s},
+    @instance = PaitinHangman::Saved.new("player_name", ['m', 'i', 's', 's', 'e', 's'], "r i g h t g u e s s e s",
                                              "chances", "word_control", "gameword", "count")
   end
 
@@ -20,14 +20,13 @@ describe PaitinHangman::Saved do
     end
   end
 
-  # describe '#trials' do
-  #   it 'can run a resmed game successfully' do
-  #     allow(@level).to receive(:setup).and_return(nil)
-  #     allow(@level).to receive(:verify_guess).and_return(nil)
-  #     allow(@level).to receive(:compare_guess).and_return(nil)
-  #     allow(@level).to receive(:win_game).and_return(nil)
-  #     allow(@level).to receive(:end_game).and_return(nil)
-  #     expect(@level.trials(10, true)).to eql nil
-  #   end
-  # end
+  describe '#trials' do
+    it 'can run a resmed game successfully' do
+      allow(@instance).to receive(:verify_guess).and_return(nil)
+      allow(@instance).to receive(:compare_guess).and_return(nil)
+      allow(@instance).to receive(:win_game).and_return(nil)
+      allow(@instance).to receive(:end_game).and_return(nil)
+      expect(@instance.trials(10)).to eql nil
+    end
+  end
 end
