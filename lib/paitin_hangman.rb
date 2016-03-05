@@ -1,6 +1,7 @@
 require_relative "paitin_hangman/messages"
-require_relative "paitin_hangman/saved_games"
+require_relative "paitin_hangman/game_resumption"
 require_relative "paitin_hangman/version"
+require_relative "paitin_hangman/simple_methods"
 require_relative "paitin_hangman/game_engine"
 module PaitinHangman
   class Paitin

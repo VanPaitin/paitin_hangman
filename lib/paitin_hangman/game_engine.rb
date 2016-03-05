@@ -1,73 +1,147 @@
 require_relative "messages"
 require_relative "levels"
-require_relative "extra_methods"
-# => This class only ensures the smooth transfer of control to the levels
+
 module PaitinHangman
-class Computer
-  def initialize
-    Message.level_choice
-  end
-
-  def level_integrity(name)
-    choice = gets.chomp
-    until choice == "1" || choice == "2" || choice == "3"
-      puts "Please press either '1', '2' or '3'"
-      choice = STDIN.gets.chomp
+  class GameEngine
+    include SimpleMethods
+    def initialize
+      @misses = []
+      @right_guesses = []
     end
-    level(choice, name)
-  end
 
-  def level(choice, name)
-    case choice
-    when "1" then Levels.new(name, 4, 8, 10)
-    when "2" then Levels.new(name, 9, 12, 12)
-    when "3" then Levels.new(name, 13, 25, 15)
+    def trials(chances, game_word, player2, player1)
+      setup(game_word, player2, player1)
+      chances.times do |counter|
+        @counter = counter
+        verify_guess
+        compare_guess
+        win_game(chances, counter)
+      end
+      end_game
+    end
+
+    def compare_guess
+      if @game_word.include?(@guess) == false
+        wrong_guess
+      else
+        correct_guess
+      end
+    end
+
+    def setup(game_word, player2, player1)
+      @player2 = player2
+      @player1 = player1
+      @game_word = game_word
+      @word_control = ""
+      @game_word.length.times { @word_control << "_" }
+      @count = 0
+      puts @word_control.gsub("_", "__ ")
+    end
+
+    def wrong_guess
+      @misses << @guess
+      puts "Bad guess, the noose tightens".red
+      puts "Try again"
+      puts @word_control.gsub("_", " __ ").upcase
+    end
+
+    def correct_guess
+      @game_word.each_char.with_index do |letter, index|
+        right_guess(letter, index)
+      end
+      @right_guesses << @guess
+      puts @word_control.gsub("_", " __ ").upcase
+    end
+
+    def right_guess(letter, index)
+      if letter == @guess
+        if @word_control.include?(@guess) == false
+          @count += 1
+          puts "Nice one!".green
+        end
+        @word_control[index] = @guess
+      end
+    end
+
+    def verify_guess
+      puts "Enter a guess"
+      @guess = gets.chomp.downcase
+      cheat_or_quit_or_history
+      until length_one?(@guess) && unique?(@guess) && number?(@guess)
+        @guess = STDIN.gets.chomp.downcase
+        puts @game_word if @guess == ":c"
+        puts "Your missed guesses: #{@misses.join(', ')}" if @guess == ":h"
+      end
+    end
+
+    def cheat_or_quit_or_history
+      if @guess == ":c"
+        puts @game_word
+        verify_guess
+      elsif @guess == "quit" || @guess == ":q"
+        quit_or_save
+      elsif @guess == ":h" || @guess == "history"
+        history_verify_guess
+      end
+    end
+
+    def history_verify_guess
+      history
+      verify_guess
+    end
+
+    def quit_or_save
+      exit if @player1.nil? == false
+      puts "Do you want to save your game? type 'Yes' or 'No'"
+      choice = STDIN.gets.chomp.downcase
+      until choice == "yes" || choice == "no"
+        puts "Please type a 'Yes' or a 'No'"
+        choice = STDIN.gets.chomp.downcase
+      end
+      choice == "no" ? exit : save_game
+    end
+
+    def save_game
+      game_data = GameData.new(@player2, @misses, @right_guesses,
+                               @chances - @counter, @word_control,
+                               @game_word, @count)
+      File.open("games.yml", "a") { |data| YAML.dump(game_data, data) }
+      puts "Goodbye, your game has been saved successfully".green
+      exit
+    end
+
+    def history
+      if @misses.empty? && @right_guesses.empty?
+        puts "you have not entered any guesses"
+      else
+        print_history
+      end
+    end
+
+    def print_history
+      if @misses.empty? && @right_guesses.empty? == false
+        puts "your right guesses are #{@right_guesses.join(', ')} but no misses"
+      elsif @misses.empty? == false && @right_guesses.empty?
+        puts "your misses are #{@misses.join(', ')} & you have no right guesses"
+      else
+        puts "\tyour misses are #{@misses.join(', ')} and your
+        right guesses are #{@right_guesses.join(', ')}"
+      end
+    end
+
+    def win_game(chances, counter, player = @player2)
+      if @count == @game_word.chars.uniq.length
+        puts "Congratulations #{player}! You have won the game".green
+        exit
+      end
+      puts "You have #{chances - 1 - counter} chance(s) left"
+    end
+
+    def end_game(player = @player2)
+      puts "Game over! You have been HANGED! Sorry #{player}".red
+      puts "The word is #{@game_word.upcase}"
+      Message.end_games
+      choice_integrity
     end
   end
-end
-
-class Player
-  include SimpleMethods
-
-  def first_player_name(name)
-    player1 = name
-    get_friend_name(player1)
-  end
-
-  def get_friend_name(player1)
-    puts "Hi #{player1}, what is the name of your friend"
-    player2 = verify_name_integrity
-    puts "Hello, #{player1} and #{player2}, who will like to challenge"
-    game(player1, player2)
-  end
-
-  def game(player1, player2)
-    begin 
-      puts "Please enter one of your names: #{player1} or #{player2}"
-      name = verify_name_integrity
-    end until name == player1 || name == player2
-    other_player = player2 if name == player1
-    other_player = player1 if name == player2
-    Message.level_choice
-    level_integrity(name, other_player)
-  end
-
-  def level_integrity(name, other_player)
-    choice = gets.chomp
-    until choice == "1" || choice == "2" || choice == "3"
-      puts "Please press either '1', '2' or '3'"
-      choice = STDIN.gets.chomp
-    end
-    select_level(choice, name, other_player)
-  end
-
-  def select_level(choice, name, other_player)
-    case choice
-    when "1" then Levels.new(other_player, 4, 8, 10, name)
-    when "2" then Levels.new(other_player, 9, 12, 12, name)
-    when "3" then Levels.new(other_player, 13, 25, 15, name)
-    end
-  end
-
-end
 end

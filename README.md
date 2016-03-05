@@ -3,47 +3,45 @@
 
 Welcome to my new gem! It is just a classic implentation of the Hangman game.
 
-To play this game, just follow the smple instructions below
+To play this game, just follow the simple instructions below
 
-## Installation
+# Installation
 
-Add this line to your application's Gemfile:
+Simply open your terminal and then run
 
-```ruby
-gem 'paitin_hangman'
-```
+ ```gem install paitin_hangman```
+ 
+ After that you will need to download the dictionary file through the link provided below. After download, you should place the dictionary on your desktop `for Windows devices` or your root/home folder `for OS X and Linux devices`. You should run the game from any of these directories (depending on which directory you placed the dictionary file.
 
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
-
-    $ gem install paitin_hangman
 
 ## Usage
 
-This game is a REPL game, i.e it is being played from and with the **Terminal**. To start it just run `paitin_hangman`. Ensure you download the dictionary file from [here](https://drive.google.com/a/andela.co/file/d/0B1C3woZnW_mZQjZpUWlpNEZlTk0/view?usp=sharing) and run the game from the folder the dictionary file is. You can run it from anywhere else but it has not been tested if it will work yet.
+This game is a REPL game, i.e it is being played from and with the **Terminal**. To start it just run `paitin_hangman`. Ensure you download the dictionary file from [here](https://drive.google.com/a/andela.co/file/d/0B1C3woZnW_mZQjZpUWlpNEZlTk0/view?usp=sharing) and run the game from the folder the dictionary file is.
 
 Once started, the game is very intuitive and easy to follow.
 
 ## Important note
-In player mode, if the player is typing his word, it will not display on the screen, it will be hidden so as not to give the challenged player undue advantage.
+In player mode, if the player is typing his word, it will not be displayed on the screen, it will be hidden so as not to give the challenged player undue advantage.
 
 *"Welcome to Hangman, the no-nonsense game
     Be smart, then you live. if not, you'll have to die by Hanging.
     You have a couple of options to pick from.....
-    Press 'P' or 'play' if you think you are ready for the challenge,
-    You may press 'I' or 'instructions' for a short explanation of how to play
-    You may continue a previously saved game by pressing 'L' or 'load'
-    Or you could just quit by pressing a 'Q' or typing 'quit'"
+    **`Press 'P' or 'play' if you think you are ready for the challenge`**,
+    **`You may press 'I' or 'instructions' for a short explanation of how to play`**
+    **`You may continue a previously saved game by pressing 'L' or 'load'`**
+    **`Or you could just quit by pressing a 'Q' or typing 'quit'"`**
     "The word to guess is represented by a row of dashes
     These dashes represent each letter of the word.
     Words you cannot use include proper nouns such as names, places, and brands.
     If the guessing player suggests a letter which occurs in the word,
     the other player writes it in all its correct positions."*
 ## Extras
-There is a cheat, you should find that by yourself
+>You can actually reveal the word by pressing `:c` or `cheat`. This is a cheat for solving the problem and it is not recommended.
+
+>You can quit at any point by pressing `:q` or typing `quit` whereby you will be asked if you want to save the game or just quit. (The option to save is only available in the computer mode.)
+>
+>If you press `:h` or type `history`, a list showing your guesses will be displayed.
+
 
 ## Development
 
@@ -59,4 +57,8 @@ Bug reports and pull requests are welcome on GitHub at https://github.com/[USERN
 ## License
 
 The gem is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
+
+
+# Enjoy your Hangman experience and try not to be hanged....
+good luck...
 

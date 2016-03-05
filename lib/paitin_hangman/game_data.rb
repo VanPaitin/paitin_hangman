@@ -1,6 +1,6 @@
 module PaitinHangman
 class GameData
-  attr_accessor :player_name, :misses, :right_guesses, :chances, :word_control, :game_word, :count
+  attr_reader :player_name, :misses, :right_guesses, :chances, :word_control, :game_word, :count
 
   def initialize(player_name, misses, right_guesses, chances, word_control, game_word, count)
     @player_name = player_name
