@@ -1,8 +1,7 @@
 require_relative "simple_methods"
 module PaitinHangman
   class Player
-    require 'pry'; binding.pry
-    # include SimpleMethods
+    include SimpleMethods
     def first_player_name(name)
       player1 = name
       get_friend_name(player1)

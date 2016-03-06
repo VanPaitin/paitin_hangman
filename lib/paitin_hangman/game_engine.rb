@@ -13,7 +13,7 @@ module PaitinHangman
       setup(game_word, player2, player1)
       chances.times do |counter|
         @counter = counter
-        verify_guess
+        verify_guess(chances)
         compare_guess
         win_game(chances, counter)
       end
@@ -63,10 +63,10 @@ module PaitinHangman
       end
     end
 
-    def verify_guess
+    def verify_guess(chances)
       puts "Enter a guess"
       @guess = gets.chomp.downcase
-      cheat_or_quit_or_history
+      cheat_or_quit_or_history(chances)
       until length_one?(@guess) && unique?(@guess) && number?(@guess)
         @guess = STDIN.gets.chomp.downcase
         puts @game_word if @guess == ":c"
@@ -74,23 +74,23 @@ module PaitinHangman
       end
     end
 
-    def cheat_or_quit_or_history
+    def cheat_or_quit_or_history(chances)
       if @guess == ":c"
         puts @game_word
-        verify_guess
+        verify_guess(chances)
       elsif @guess == "quit" || @guess == ":q"
-        quit_or_save
+        quit_or_save(chances)
       elsif @guess == ":h" || @guess == "history"
-        history_verify_guess
+        history_verify_guess(chances)
       end
     end
 
-    def history_verify_guess
+    def history_verify_guess(chances)
       history
-      verify_guess
+      verify_guess(chances)
     end
 
-    def quit_or_save
+    def quit_or_save(chances)
       exit if @player1.nil? == false
       puts "Do you want to save your game? type 'Yes' or 'No'"
       choice = STDIN.gets.chomp.downcase
@@ -98,12 +98,12 @@ module PaitinHangman
         puts "Please type a 'Yes' or a 'No'"
         choice = STDIN.gets.chomp.downcase
       end
-      choice == "no" ? exit : save_game
+      choice == "no" ? exit : save_game(chances)
     end
 
-    def save_game
+    def save_game(chances)
       game_data = GameData.new(@player2, @misses, @right_guesses,
-                               @chances - @counter, @word_control,
+                               (chances - @counter), @word_control,
                                @game_word, @count)
       File.open("games.yml", "a") { |data| YAML.dump(game_data, data) }
       puts "Goodbye, your game has been saved successfully".green

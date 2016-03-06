@@ -26,7 +26,8 @@ module PaitinHangman
     end
 
     def word_generator(min, max, path = "")
-      words = File.open("../dictionary.txt", "r").readlines.map!(&:chomp)
+      file_name = File.join(File.dirname(File.expand_path(__FILE__)), '../dictionary.txt')
+      words = File.open(file_name, "r").readlines.map!(&:chomp)
       level_words = words.select { |i| i.length >= min && i.length <= max }
       random_index = rand(level_words.length)
       @game_word = level_words[random_index]
@@ -37,7 +38,7 @@ module PaitinHangman
       @game_word = STDIN.noecho(&:gets).chomp.downcase.delete(" ")
       until @game_word.length >= min && @game_word.length <= max &&
             number?(@game_word)
-        puts "Word length not correct!Make it between #{min} & #{max} characters"
+        puts "Word length not correct! Make it between #{min} & #{max} characters"
         @game_word = STDIN.noecho(&:gets).chomp.downcase.delete(" ")
       end
       puts "The stage is set #{@player2}"

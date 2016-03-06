@@ -1,29 +1,17 @@
 require_relative "messages"
-require_relative "computer"
-require_relative "player"
 
 module PaitinHangman
   module SimpleMethods
-    
+    # => This method verifies the integrity of names
     def verify_name_integrity
       name = gets.chomp.upcase.strip
-      while name.scan(/[^A-Z\s-]/).empty? == false || name.empty?
+      while name.scan(/[^A-Z\s-]/).empty? == false || name.empty? # => It scans for anything other than a letter, a space or a dash
         Message.verify_name
         name = STDIN.gets.chomp.upcase.strip
       end
       name
     end
 
-    # => This technically begins the game
-    def play(name)
-      Message.game_type
-      option_integrity
-      if @option == "2"
-        Computer.new.level_integrity(name)
-      else
-        Player.new.first_player_name(name)
-      end
-    end
     # => The method makes sure a valid option is picked
 
     def option_integrity
@@ -73,7 +61,7 @@ module PaitinHangman
 
     def decide(choice)
       if choice == "r"
-        @player1 ? play(@player1) : play(@player2)
+        @player1 ? Paitin.new.play(@player1) : Paitin.new.play(@player2)
       else
         exit
       end

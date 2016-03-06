@@ -1,6 +1,6 @@
-require_relative "levels"
+require_relative "game_engine"
 module PaitinHangman
-  class GameResumption < Levels
+  class GameResumption < GameEngine
     def initialize
       @all_games = YAML.load_stream(File.open("games.yml", "a+"))
       puts "Enter the name you used to store the game"
@@ -45,7 +45,7 @@ module PaitinHangman
     end
 
     def load_properties_cont
-      count = @game_object.count
+      @count = @game_object.count
       trials(@chances)
     end
 
@@ -61,11 +61,11 @@ module PaitinHangman
       setup
       chances.times do |counter|
         @counter = counter
-        verify_guess
+        verify_guess(chances)
         compare_guess
-        win_game(chances, counter, @player_name)
+        win_game(chances, counter, @name)
       end
-      end_game(@player_name)
+      end_game(@name)
     end
 
     def setup
