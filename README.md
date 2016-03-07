@@ -11,20 +11,19 @@ Simply open your terminal and then run
 
  ```gem install paitin_hangman```
  
- After that you will need to download the dictionary file through the link provided below. After download, you should place the dictionary on your desktop `for Windows devices` or your root/home folder `for OS X and Linux devices`. You should run the game from any of these directories (depending on which directory you placed the dictionary file.
+ If you are on a **windows platform**, open the command prompt and the run the command above
+ 
+
 
 
 ## Usage
 
-This game is a REPL game, i.e it is being played from and with the **Terminal**. To start it just run `paitin_hangman`. Ensure you download the dictionary file from [here](https://drive.google.com/a/andela.co/file/d/0B1C3woZnW_mZQjZpUWlpNEZlTk0/view?usp=sharing) and run the game from the folder the dictionary file is.
+This game is a REPL game, i.e it is being played from and with the **Terminal**. To start it just run `paitin_hangman`.
 
 Once started, the game is very intuitive and easy to follow.
 
-## Important note
-In player mode, if the player is typing his word, it will not be displayed on the screen, it will be hidden so as not to give the challenged player undue advantage.
-
-*"Welcome to Hangman, the no-nonsense game
-    Be smart, then you live. if not, you'll have to die by Hanging.
+###"Welcome to Hangman, the no-nonsense game
+  Be smart, then you live. if not, you'll have to die by Hanging.
     You have a couple of options to pick from.....
     **`Press 'P' or 'play' if you think you are ready for the challenge`**,
     **`You may press 'I' or 'instructions' for a short explanation of how to play`**
@@ -34,7 +33,14 @@ In player mode, if the player is typing his word, it will not be displayed on th
     These dashes represent each letter of the word.
     Words you cannot use include proper nouns such as names, places, and brands.
     If the guessing player suggests a letter which occurs in the word,
-    the other player writes it in all its correct positions."*
+    the other player writes it in all its correct positions."
+    
+The guessing player must guess all of the letters of the word within a limited amount of chances. Faiure to do so will result in his death by hanging
+
+## Important note
+In player mode, if the player is typing his word, it will not be displayed on the screen, it will be hidden so as not to give the challenged player undue advantage.
+
+
 ## Extras
 >You can actually reveal the word by pressing `:c` or `cheat`. This is a cheat for solving the problem and it is not recommended.
 
