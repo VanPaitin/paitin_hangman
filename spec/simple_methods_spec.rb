@@ -17,35 +17,7 @@ describe 'PaitinHangman::SimpleMethods::@dummyClass' do
       expect(@dummy.verify_name_integrity).to eql 'PAITIN'
     end
   end
-  describe '#play' do
-    before(:each) do
-      @computer = PaitinHangman::Computer.new
-      @player = PaitinHangman::Player.new
-      allow(@dummy).to receive(:option_integrity).and_return(nil)
-      allow(PaitinHangman::Computer).to receive(:new).and_return(@computer)
-      allow(PaitinHangman::Player).to receive(:new).and_return(@player)
-    end
-
-    context "if it is '2'" do
-
-      it "should begin a computer game" do
-        # allow(@dummy).to receive(:option_integrity).and_return('2')
-        allow(@computer).to receive(:level_integrity).and_return("computer game")
-        @dummy.instance_variable_set("@option", '2')
-        expect(@dummy.play("Simon")).to eql "computer game"
-      end
-    end
-
-    context "if it is '1'" do
-
-      it "should begin a player game" do
-        allow(@player).to receive(:first_player_name).and_return("player game")
-       
-        expect(@dummy.play("Simon")).to eql "player game"
-      end
-    end
   
-  end
 
   describe '#option_integrity' do
 
@@ -63,10 +35,10 @@ describe 'PaitinHangman::SimpleMethods::@dummyClass' do
   end
 
   describe '#length_one?' do
-    it 'can return true or false' do
-      expect(@dummy.length_one?("1")).to eql true
-      expect(@dummy.length_one?("ab")).to eql false
-      expect(@dummy.length_one?("20")).to eql false
+    context 'can return true or false' do
+      it { expect(@dummy.length_one?("1")).to eql true }
+      it { expect(@dummy.length_one?("ab")).to eql false }
+      it { expect(@dummy.length_one?("20")).to eql false }
     end
   end
 
@@ -111,14 +83,18 @@ describe 'PaitinHangman::SimpleMethods::@dummyClass' do
   end
 
   describe '#decide' do
+    before(:each) do
+      @paitin = PaitinHangman::Paitin.new
+      allow(PaitinHangman::Paitin).to receive(:new).and_return(@paitin)
+    end
     it 'can exit the game' do
       allow(@dummy).to receive(:exit).and_return nil
       expect(@dummy.decide('q')).to eql nil
     end
 
     it 'can start another game' do
-      allow(@dummy).to receive(:play).and_return(nil)
-      expect(@dummy.decide('r')).to eql nil
+      allow(@paitin).to receive(:play).and_return("game")
+      expect(@paitin.decide('r')).to eql "game"
     end
   end
 end

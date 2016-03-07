@@ -4,10 +4,9 @@ describe "PaitinHangman::GameResumption" do
   
 end
 
-describe PaitinHangman::Saved do
+describe PaitinHangman::GameResumption do
   before :each do
-    @instance = PaitinHangman::Saved.new("player_name", ['m', 'i', 's', 's', 'e', 's'], "r i g h t g u e s s e s",
-                                             "chances", "word_control", "gameword", "count")
+    @instance = PaitinHangman::GameResumption.new
   end
 
   describe '#new' do

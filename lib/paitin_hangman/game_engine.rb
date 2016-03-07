@@ -4,6 +4,7 @@ require_relative "levels"
 module PaitinHangman
   class GameEngine
     include SimpleMethods
+    attr_reader :count, :misses, :right_guesses, :guess, :player2
     def initialize
       @misses = []
       @right_guesses = []
@@ -91,7 +92,7 @@ module PaitinHangman
     end
 
     def quit_or_save(chances)
-      exit if @player1.nil? == false
+      exit if @player1
       puts "Do you want to save your game? type 'Yes' or 'No'"
       choice = STDIN.gets.chomp.downcase
       until choice == "yes" || choice == "no"
@@ -123,7 +124,7 @@ module PaitinHangman
       if @misses.empty? && @right_guesses.empty? == false
         puts "your right guesses are #{@right_guesses.join(', ')} but no misses"
       elsif @misses.empty? == false && @right_guesses.empty?
-        puts "your misses are #{@misses.join(', ')} & you have no right guesses"
+        puts "your misses are #{@misses.join(', ')} & you have no right_guesses"
       else
         puts "\tyour misses are #{@misses.join(', ')} and your
         right guesses are #{@right_guesses.join(', ')}"

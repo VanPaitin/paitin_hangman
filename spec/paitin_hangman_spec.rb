@@ -87,4 +87,33 @@ describe 'Paitin' do
     end
   end
 
+  describe '#play' do
+    before(:each) do
+      @computer = PaitinHangman::Computer.new
+      @player = PaitinHangman::Player.new
+      allow(@instance).to receive(:option_integrity).and_return(nil)
+      allow(PaitinHangman::Computer).to receive(:new).and_return(@computer)
+      allow(PaitinHangman::Player).to receive(:new).and_return(@player)
+    end
+
+    context "if it is '2'" do
+
+      it "should begin a computer game" do
+        allow(@computer).to receive(:level_integrity).and_return("computer game")
+        @instance.instance_variable_set("@option", '2')
+        expect(@instance.play("Simon")).to eql "computer game"
+      end
+    end
+
+    context "if it is '1'" do
+
+      it "should begin a player game" do
+        allow(@player).to receive(:first_player_name).and_return("player game")
+       
+        expect(@instance.play("Simon")).to eql "player game"
+      end
+    end
+  
+  end
+
 end
