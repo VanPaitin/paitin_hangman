@@ -105,7 +105,8 @@ module PaitinHangman
       game_data = GameData.new(@player2, @misses, @right_guesses,
                                (chances - @counter), @word_control,
                                @game_word, @count)
-      File.open("games.yml", "a") { |data| YAML.dump(game_data, data) }
+      file_name = File.join(File.dirname(File.expand_path(__FILE__)), '../../games.yml')
+      File.open(file_name, "a") { |data| YAML.dump(game_data, data) }
       puts "Goodbye, your game has been saved successfully".green
       exit
     end

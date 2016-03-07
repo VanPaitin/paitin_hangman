@@ -1,0 +1,13 @@
+--- !ruby/object:PaitinHangman::GameData
+player_name: LALA
+misses:
+- e
+right_guesses:
+- a
+- s
+- r
+- t
+chances: 10
+word_control: _r_strat_____
+game_word: frustratingly
+count: 4

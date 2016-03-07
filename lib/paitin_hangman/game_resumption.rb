@@ -2,7 +2,8 @@ require_relative "game_engine"
 module PaitinHangman
   class GameResumption < GameEngine
     def initialize
-      @all_games = YAML.load_stream(File.open("games.yml", "a+"))
+      file_name = File.join(File.dirname(File.expand_path(__FILE__)), '../../games.yml')
+      @all_games = YAML.load_stream(File.open(file_name, "a+"))
       puts "Enter the name you used to store the game"
       name = STDIN.gets.chomp.upcase
       @saved_game = @all_games.select do |game|

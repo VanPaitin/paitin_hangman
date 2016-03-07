@@ -26,7 +26,7 @@ module PaitinHangman
     end
 
     def word_generator(min, max, path = "")
-      file_name = File.join(File.dirname(File.expand_path(__FILE__)), '../dictionary.txt')
+      file_name = File.join(File.dirname(File.expand_path(__FILE__)), '../../dictionary.txt')
       words = File.open(file_name, "r").readlines.map!(&:chomp)
       level_words = words.select { |i| i.length >= min && i.length <= max }
       random_index = rand(level_words.length)
