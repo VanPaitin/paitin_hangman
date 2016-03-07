@@ -651,3 +651,163 @@ chances: -9
 word_control: _i__i_i__
 game_word: liquidize
 count: 2
+--- !ruby/object:PaitinHangman::GameData
+player_name: 
+misses:
+- e
+right_guesses:
+- i
+chances: -9
+word_control: _i__i_i__
+game_word: liquidize
+count: 2
+--- !ruby/object:PaitinHangman::GameData
+player_name: 
+misses:
+- e
+right_guesses:
+- i
+chances: -9
+word_control: _i__i_i__
+game_word: liquidize
+count: 2
+--- !ruby/object:PaitinHangman::GameData
+player_name: 
+misses:
+- e
+right_guesses:
+- i
+chances: -9
+word_control: _i__i_i__
+game_word: liquidize
+count: 2
+--- !ruby/object:PaitinHangman::GameData
+player_name: 
+misses:
+- e
+right_guesses:
+- i
+chances: -9
+word_control: _i__i_i__
+game_word: liquidize
+count: 2
+--- !ruby/object:PaitinHangman::GameData
+player_name: 
+misses:
+- e
+right_guesses:
+- i
+chances: -9
+word_control: _i__i_i__
+game_word: liquidize
+count: 2
+--- !ruby/object:PaitinHangman::GameData
+player_name: 
+misses:
+- e
+right_guesses:
+- i
+chances: -9
+word_control: _i__i_i__
+game_word: liquidize
+count: 2
+--- !ruby/object:PaitinHangman::GameData
+player_name: 
+misses:
+- e
+right_guesses:
+- i
+chances: -9
+word_control: _i__i_i__
+game_word: liquidize
+count: 2
+--- !ruby/object:PaitinHangman::GameData
+player_name: 
+misses:
+- e
+right_guesses:
+- i
+chances: -9
+word_control: _i__i_i__
+game_word: liquidize
+count: 2
+--- !ruby/object:PaitinHangman::GameData
+player_name: 
+misses:
+- e
+right_guesses:
+- i
+chances: -9
+word_control: _i__i_i__
+game_word: liquidize
+count: 2
+--- !ruby/object:PaitinHangman::GameData
+player_name: 
+misses:
+- e
+right_guesses:
+- i
+chances: -9
+word_control: _i__i_i__
+game_word: liquidize
+count: 2
+--- !ruby/object:PaitinHangman::GameData
+player_name: 
+misses:
+- e
+right_guesses:
+- i
+chances: -9
+word_control: _i__i_i__
+game_word: liquidize
+count: 2
+--- !ruby/object:PaitinHangman::GameData
+player_name: 
+misses:
+- e
+right_guesses:
+- i
+chances: -9
+word_control: _i__i_i__
+game_word: liquidize
+count: 2
+--- !ruby/object:PaitinHangman::GameData
+player_name: 
+misses:
+- e
+right_guesses:
+- i
+chances: -9
+word_control: _i__i_i__
+game_word: liquidize
+count: 2
+--- !ruby/object:PaitinHangman::GameData
+player_name: 
+misses:
+- e
+right_guesses:
+- i
+chances: -9
+word_control: _i__i_i__
+game_word: liquidize
+count: 2
+--- !ruby/object:PaitinHangman::GameData
+player_name: 
+misses:
+- e
+right_guesses:
+- i
+chances: -9
+word_control: _i__i_i__
+game_word: liquidize
+count: 2
+--- !ruby/object:PaitinHangman::GameData
+player_name: 
+misses:
+- e
+right_guesses:
+- i
+chances: -9
+word_control: _i__i_i__
+game_word: liquidize
+count: 2
