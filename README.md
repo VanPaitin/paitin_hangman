@@ -5,6 +5,7 @@ Welcome to my new gem! It is just a classic implentation of the Hangman game.
 
 To play this game, just follow the simple instructions below
 
+
 # Installation
 
 Simply open your terminal and then run
@@ -65,6 +66,6 @@ Bug reports and pull requests are welcome on GitHub at https://github.com/[USERN
 The gem is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
 
 
-# Enjoy your Hangman experience and try not to be hanged....
+# Enjoy your Hangman experience and try not to be hanged...
 good luck...
 

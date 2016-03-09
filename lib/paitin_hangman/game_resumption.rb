@@ -1,12 +1,13 @@
 require_relative "game_engine"
 module PaitinHangman
   class GameResumption < GameEngine
+    attr_reader :all_games
     def initialize
       file_name = File.join(File.dirname(File.expand_path(__FILE__)), '../../games.yml')
       @all_games = YAML.load_stream(File.open(file_name, "a+"))
       puts "Enter the name you used to store the game"
       name = STDIN.gets.chomp.upcase
-      @saved_game = @all_games.select do |game|
+      @saved_game = all_games.select do |game|
         game.player_name == name
       end
       initialize_cont(name)
@@ -20,10 +21,10 @@ module PaitinHangman
       end
       puts "Here are the saved games found for #{name}\n\n"
       print_function
-      choice_integrity
+      choice_integrities
     end
 
-    def choice_integrity
+    def choice_integrities
       puts "Now enter the number for the game you want to play".blue
       @choice = STDIN.gets.chomp.to_i
       until @choice > 0 && @choice <= @saved_game.length
