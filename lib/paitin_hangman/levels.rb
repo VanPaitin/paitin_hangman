@@ -36,12 +36,20 @@ module PaitinHangman
     def challenge_word(min, max)
       puts "Now, enter your challenge_word #{@player1}, it will be hidden"
       @game_word = STDIN.noecho(&:gets).chomp.downcase.delete(" ")
-      until @game_word.length >= min && @game_word.length <= max && number?(@game_word)
+      until player_word_length_integrity(min, max) && number?(@game_word)
         puts "Word length not correct! Make it between #{min} & #{max} characters"
         @game_word = STDIN.noecho(&:gets).chomp.downcase.delete(" ")
       end
       puts "The stage is set #{@player2}"
       GameEngine.new.trials(@chances, @game_word, @player2, @player1)
+    end
+
+    def player_word_length_integrity(min, max)
+      if @game_word.length >= min && @game_word.length <= max
+        return true
+      else
+        return false
+      end
     end
 
   end
