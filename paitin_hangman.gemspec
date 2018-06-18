@@ -32,6 +32,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rspec", "~> 3.0"
   spec.add_development_dependency "pry", "~>0.10.3"
   spec.add_runtime_dependency "colorize", "~>0.7.7"
-  spec.add_development_dependency 'codeclimate-test-reporter'
   spec.add_development_dependency 'simplecov'
 end
