@@ -1,5 +1,5 @@
 # PaitinHangman
-[![Code Climate](https://codeclimate.com/github/andela-mpitan/paitin_hangman/badges/gpa.svg)](https://codeclimate.com/github/andela-mpitan/paitin_hangman) [![Test Coverage](https://codeclimate.com/github/andela-mpitan/paitin_hangman/badges/coverage.svg)](https://codeclimate.com/github/andela-mpitan/paitin_hangman/coverage) [![Build Status](https://travis-ci.org/andela-mpitan/paitin_hangman.svg?branch=master)](https://travis-ci.org/andela-mpitan/paitin_hangman)
+[![Code Climate](https://codeclimate.com/github/vanpaitin/paitin_hangman/badges/gpa.svg)](https://codeclimate.com/github/andela-mpitan/paitin_hangman) [![Test Coverage](https://codeclimate.com/github/andela-mpitan/paitin_hangman/badges/coverage.svg)](https://codeclimate.com/github/andela-mpitan/paitin_hangman/coverage) [![Build Status](https://travis-ci.org/andela-mpitan/paitin_hangman.svg?branch=master)](https://travis-ci.org/andela-mpitan/paitin_hangman)
 
 Welcome to my new gem! It is just a classic implentation of the Hangman game.
 
